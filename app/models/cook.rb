@@ -8,7 +8,7 @@ class Cook < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    self.all.find{|user| user.slug == slug}
+    self.all.find{|cook| cook.slug == slug}
   end
 
 end
