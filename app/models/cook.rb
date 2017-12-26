@@ -1,6 +1,5 @@
 class Cook < ActiveRecord::Base
   has_many :recipes
-  belongs_to :restaurant
   has_secure_password
   validates_presence_of :username, :email, :password
 
