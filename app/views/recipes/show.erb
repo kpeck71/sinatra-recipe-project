@@ -1,5 +1,8 @@
 <h2><%=@recipe.name%></h2>
-<strong>Ingredients: </strong><%=@recipe.ingredients%>
+<strong>Chef: </strong>
+<%=@recipe.cook.name%>
+<strong>Ingredients: </strong>
+<%=@recipe.ingredients%>
 <br>
 <strong>Categories:</strong>
 <%@recipe.categories.each do |category|%>

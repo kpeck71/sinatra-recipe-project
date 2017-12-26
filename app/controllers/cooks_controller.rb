@@ -7,11 +7,16 @@ class CooksController < ApplicationController
     end
   end
 
+  get '/signup' do
+    erb :'/cooks/create_cook'
+  end
+
   post '/signup' do
    if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-     @user = Cook.create(username: params[:username], email: params[:email], password: params[:password])
-     @user.save
-     session[:user_id] = @user.id
+     binding.pry
+     @cook = Cook.create(username: params[:username], email: params[:email], password: params[:password])
+     @cook.save
+     session[:cook_id] = @cook.id
      redirect("/recipes")
    else
      redirect("/signup")
