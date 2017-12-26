@@ -4,25 +4,7 @@ class ApplicationController < Sinatra::Base
   set :views, Proc.new { File.join(root, "../views/") }
 
   get '/' do
-    @recipes = Recipe.all
-    erb :'/recipes/index'
-  end
-
-  get '/login' do
-    if !is_logged_in?
-      erb :'cooks/login'
-    else
-      redirect("/recipes/index")
-    end
-  end
-
-  get '/logout' do
-    if is_logged_in?
-      session.clear
-      redirect("/login")
-    else
-      redirect("/login")
-    end
+    erb :'/index'
   end
 
   helpers do
