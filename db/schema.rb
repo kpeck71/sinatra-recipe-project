@@ -14,6 +14,9 @@ ActiveRecord::Schema.define(version: 20171226145441) do
 
   create_table "cooks", force: :cascade do |t|
     t.string "name"
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
     t.integer "restaurant_id"
   end
 
@@ -21,6 +24,7 @@ ActiveRecord::Schema.define(version: 20171226145441) do
     t.string "name"
     t.string "ingredients"
     t.integer "cook_id"
+    t.integer "restaurant_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
