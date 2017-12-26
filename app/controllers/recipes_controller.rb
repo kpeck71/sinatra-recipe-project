@@ -11,7 +11,6 @@ class RecipesController < ApplicationController
   end
 
   post '/recipes/:slug' do
-    binding.pry
     @recipe = Recipe.find_by_slug(params[:slug])
     @recipe.update(params[:recipe])
 
@@ -24,7 +23,7 @@ class RecipesController < ApplicationController
     end
 
     if !params[:category][:name].empty?
-      @recipe.categories << Category.create(params[:category])
+      @recipe.categories << Category.create(name: params[:category][:name])
     end
 
     @recipe.save

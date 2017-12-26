@@ -1,7 +1,9 @@
 <h2><%=@recipe.name%></h2>
-Ingredients: <%=@recipe.ingredients%>
-<p>Categories:<%@recipe.categories.each do |category|%></p>
-<br><%=category.name%>
+<strong>Ingredients: </strong><%=@recipe.ingredients%>
+<br>
+<strong>Categories:</strong>
+<%@recipe.categories.each do |category|%>
+<br>---------------- <%=category.name%>
 <%end%>
 
 <h3>Edit Recipe</h3>
@@ -18,3 +20,10 @@ Ingredients: <%=@recipe.ingredients%>
 <p>And/or Create New Category: <input type="text" name="category[name]" id="new_category"></input></p>
   <input type ="submit" value="Edit Recipe">
 </form>
+
+<p><a href ="/recipes">See All Recipes</a></p>
+<%if logged_in?%>
+<p><a href ="/logout">Log Out</a></p>
+<%else%>
+<p><a href ="/login">Log In</a></p>
+<%end%>
