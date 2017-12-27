@@ -11,14 +11,13 @@ class RecipesController < ApplicationController
 
   get '/recipes/:slug' do
     @recipe = Recipe.find_by_slug(params[:slug])
-    binding.pry
     erb :'/recipes/show'
   end
 
   post '/recipes' do
     if logged_in?
       if params[:name] != "" && params[:ingredients] != ""
-        @recipe = current_user.recipe.create(name: params[:name], ingredients: params[:ingredients], cook_id: current_user.id)
+        @recipe = current_user.recipes.create(name: params[:name], ingredients: params[:ingredients], cook_id: current_user.id)
         @recipe.save
         redirect("/recipes/#{@recipe.id}")
       else
@@ -29,7 +28,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  post '/recipes/:slug' do
+  patch '/recipes/:slug' do
     @recipe = Recipe.find_by_slug(params[:slug])
     @recipe.update(params[:recipe])
 
