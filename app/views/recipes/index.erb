@@ -1,5 +1,10 @@
 <h3>All Current Recipes</h3>
 <%@recipes.each do |recipe|%>
-<strong><%=recipe.name%></strong>
+- <a href="/recipes/<%=recipe.slug%>"><%=recipe.name%></a>
 <br></br>
+<%end%>
+
+<%if logged_in?%>
+<p><%=current_user.name%></p>
+<p><a href="/recipes/new">Create Your Recipe</a></p>
 <%end%>

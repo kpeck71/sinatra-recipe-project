@@ -1,10 +1,10 @@
 class Cook < ActiveRecord::Base
   has_many :recipes
   has_secure_password
-  validates_presence_of :username, :email, :password
+  validates_presence_of :username, :password
 
   def slug
-    username.downcase.gsub(" ","-")
+    name.downcase.gsub(" ","-")
   end
 
   def self.find_by_slug(slug)

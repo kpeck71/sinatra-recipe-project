@@ -8,28 +8,10 @@ class CooksController < ApplicationController
   end
 
   get '/signup' do
-    erb :'/cooks/create_cook'
-  end
-
-  post '/signup' do
-   if !params[:username].empty? && !params[:email].empty? && !params[:password].empty?
-     binding.pry
-     @cook = Cook.create(username: params[:username], email: params[:email], password: params[:password])
-     @cook.save
-     session[:cook_id] = @cook.id
-     redirect("/recipes")
-   else
-     redirect("/signup")
-   end
-  end
-
-   post '/login' do
-    @user = Cook.find_by(username: params[:username])
-    if @user != nil && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      redirect("/recipes")
+    if !logged_in?
+      erb :'/cooks/create_cook'
     else
-      redirect("/signup")
+      redirect("/recipes")
     end
   end
 
@@ -41,4 +23,36 @@ class CooksController < ApplicationController
       redirect("/login")
     end
   end
+
+  get '/cooks' do
+    @cooks = Cook.all
+    erb :'/cooks/index'
+  end
+
+  get '/cooks/:slug' do
+    @cook = Cook.find_by_slug(params[:slug])
+    erb :'/cooks/show'
+  end
+
+  post '/signup' do
+   if !params[:name].empty? && !params[:username].empty? && !params[:password].empty?
+     @cook = Cook.create(name: params[:name],username: params[:username], password: params[:password])
+     @cook.save
+     session[:user_id] = @cook.id
+     redirect("/recipes")
+   else
+     redirect("/signup")
+   end
+  end
+
+   post '/login' do
+    @cook = Cook.find_by(username: params[:username])
+    if @cook != nil && @cook.authenticate(params[:password])
+      session[:user_id] = @cook.id
+      redirect("/recipes")
+    else
+      redirect("/signup")
+    end
+  end
+
 end
