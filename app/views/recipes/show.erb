@@ -11,16 +11,11 @@
 <%end%>
 
 <%if current_user.id == @recipe.user_id%>
-  <h3><a href="/recipes/<%=@recipe.slug%>/edit">Edit Your Recipe</h3>
+<br></br>
+<input type="button" value="Edit Your Recipe" onclick="window.location.href='/recipes/<%=@recipe.slug%>/edit'">
+<br></br>
   <form action="/recipes/<%=@recipe.slug%>/delete" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
     <input type="submit" value="Delete Recipe">
   </form>
-<%end%>
-
-<p><a href ="/recipes">See All Recipes</a></p>
-<%if logged_in?%>
-<p><a href ="/logout">Log Out</a></p>
-<%else%>
-<p><a href ="/login">Log In</a></p>
 <%end%>

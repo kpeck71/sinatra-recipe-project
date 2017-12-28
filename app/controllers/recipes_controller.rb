@@ -16,7 +16,6 @@ class RecipesController < ApplicationController
 
   get '/recipes/:slug' do
     @recipe = Recipe.find_by_slug(params[:slug])
-    binding.pry
     erb :'/recipes/show'
   end
 
