@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   get '/login' do
     if !logged_in?
-      erb :'/login'
+      erb :'/users/login'
     else
       redirect("/recipes")
     end
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   post '/signup' do
    if !params[:name].empty? && !params[:username].empty? && !params[:password].empty?
      @user = User.create(name: params[:name],username: params[:username], password: params[:password])
-     @User.save
+     @user.save
      session[:user_id] = @user.id
      redirect("/recipes")
    else

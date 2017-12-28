@@ -5,5 +5,10 @@
 <br></br>
 <label>Ingredients: </label><input type="text" name="ingredients">
 <br></br>
-<input type="submit" value="submit" name="submit" id="submit">
+<label><strong>Category: </p><%Category.all.each do |category|%></strong></label>
+<label><%=category.name%></label>
+<input type="checkbox" name="recipe[category_ids][]" value="<%=category.id%>" id="<%= category.name %>"</input>
+<%end%>
+
+<input type="submit" value="Submit">
 </form>
