@@ -1,32 +1,21 @@
 <h2><%=@recipe.name%></h2>
 <strong>Chef: </strong>
-<%=@recipe.user.name%>
+<a href="/users/<%=@recipe.user.slug%>"><%=@recipe.user.name%></a>
 <br></br>
 <strong>Ingredients: </strong>
 <%=@recipe.ingredients%>
 <br></br>
 <strong>Categories:</strong>
 <%@recipe.categories.each do |category|%>
-<br>---------------- <a href="/categories/<%=category.slug%>"><%=category.name%></a>
+<br><a href="/categories/<%=category.slug%>"><%=category.name%></a>
 <%end%>
 
-<%if current_user.id = @recipe.cook_id%>
-<h3>Edit Your Recipe</h3>
-
-<form action="/recipes/<%=@recipe.slug%>" method="post">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  <label>Name: </label><input type="text" name="recipe[name]" value="<%=@recipe.name%>">
-  <br></br>
-  <label>Ingredients: </label><input type="text" name="recipe[ingredients]" value="<%=@recipe.ingredients%>">
-  <br></br>
-  <label><strong>Category: </p><%Category.all.each do |category|%></strong></label>
-  <label><%=category.name%></label>
-  <input type="checkbox" name="recipe[category_ids][]" value="<%=category.id%>" id="<%= category.name %>" <%='checked' if @recipe.categories.include?(category) %>></input>
-
-<%end%>
-<p>And/or Create New Category: <input type="text" name="category[name]" id="new_category"></input></p>
-  <input type ="submit" value="Update Recipe">
-</form>
+<%if current_user.id == @recipe.user_id%>
+  <h3><a href="/recipes/<%=@recipe.slug%>/edit">Edit Your Recipe</h3>
+  <form action="/recipes/<%=@recipe.slug%>/delete" method="post">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Recipe">
+  </form>
 <%end%>
 
 <p><a href ="/recipes">See All Recipes</a></p>

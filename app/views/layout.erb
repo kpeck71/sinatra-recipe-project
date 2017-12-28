@@ -5,12 +5,9 @@
     <title>Chef's Recipe Index</title>
   </head>
   <body>
-    <nav>
+    <nav> <!--make this align right -->
       <% if logged_in? %>
-
         Hello, <%=current_user.name %>  |  <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a>
-        
-
       <% else %>
         <a href="/signup">Sign Up</a>
         <a href="/login"> Log In </a>
@@ -26,4 +23,8 @@
       <%= yield %>
     </div>
   </body>
+  <footer>
+    <br></br>
+    <p><a href ="/recipes">See All Recipes</a></p>
+  </footer>
 </html>

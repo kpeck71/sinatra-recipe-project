@@ -1,6 +1,6 @@
 class Recipe < ActiveRecord::Base
   has_many :categories
-  belongs_to :cook
+  belongs_to :user
 
   def slug
     name.downcase.gsub(" ","-")

@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20171226145441) do
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "ingredients"
-    t.integer "cook_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|

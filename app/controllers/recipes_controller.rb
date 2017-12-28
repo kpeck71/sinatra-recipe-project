@@ -9,17 +9,23 @@ class RecipesController < ApplicationController
     erb :'/recipes/new'
   end
 
+  get '/recipes/:slug/edit' do
+    @recipe = Recipe.find_by_slug(params[:slug])
+    erb :'/recipes/edit'
+  end
+
   get '/recipes/:slug' do
     @recipe = Recipe.find_by_slug(params[:slug])
+    binding.pry
     erb :'/recipes/show'
   end
 
   post '/recipes' do
     if logged_in?
       if params[:name] != "" && params[:ingredients] != ""
-        @recipe = current_user.recipes.create(name: params[:name], ingredients: params[:ingredients], cook_id: current_user.id)
+        @recipe = current_user.recipes.create(name: params[:name], ingredients: params[:ingredients], user_id: current_user.id)
         @recipe.save
-        redirect("/recipes/#{@recipe.id}")
+        redirect("/recipes/#{@recipe.slug}")
       else
         redirect("/recipes/new")
       end
@@ -47,5 +53,20 @@ class RecipesController < ApplicationController
     @recipe.save
 
     redirect("/recipes/#{@recipe.slug}")
+  end
+
+  delete '/recipes/:slug/delete' do
+    if logged_in?
+    @recipe = Recipe.find_by_slug(params[:slug])
+      if @recipe.user_id == current_user.id
+        @recipe.delete
+        redirect("/recipes")
+      else
+        #flash message?
+        redirect("/recipes")
+      end
+    else
+      redirect("/login")
+    end
   end
 end
