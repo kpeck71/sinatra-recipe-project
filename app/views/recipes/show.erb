@@ -1,6 +1,6 @@
 <h2><%=@recipe.name%></h2>
 <strong>Chef: </strong>
-<%=@recipe.cook.name%>
+<%=@recipe.user.name%>
 <br></br>
 <strong>Ingredients: </strong>
 <%=@recipe.ingredients%>
@@ -16,10 +16,12 @@
 <form action="/recipes/<%=@recipe.slug%>" method="post">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <label>Name: </label><input type="text" name="recipe[name]" value="<%=@recipe.name%>">
+  <br></br>
   <label>Ingredients: </label><input type="text" name="recipe[ingredients]" value="<%=@recipe.ingredients%>">
-  <label><p><strong>Category: </p><%Category.all.each do |category|%></strong></label>
+  <br></br>
+  <label><strong>Category: </p><%Category.all.each do |category|%></strong></label>
   <label><%=category.name%></label>
-  <input type="checkbox" name="recipe[category_ids][]" value="<%=category.id%>" id="<%= category.name %>" <%='checked' if @recipe.categories.include?(category) %>> / </input>
+  <input type="checkbox" name="recipe[category_ids][]" value="<%=category.id%>" id="<%= category.name %>" <%='checked' if @recipe.categories.include?(category) %>></input>
 
 <%end%>
 <p>And/or Create New Category: <input type="text" name="category[name]" id="new_category"></input></p>

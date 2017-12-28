@@ -17,16 +17,16 @@ ActiveRecord::Schema.define(version: 20171226145441) do
     t.string "recipe_id"
   end
 
-  create_table "cooks", force: :cascade do |t|
-    t.string "name"
-    t.string "username"
-    t.string "password_digest"
-  end
-
   create_table "recipes", force: :cascade do |t|
     t.string "name"
     t.string "ingredients"
     t.integer "cook_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "username"
+    t.string "password_digest"
   end
 
 end

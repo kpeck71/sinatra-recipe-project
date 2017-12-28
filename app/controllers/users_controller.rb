@@ -1,7 +1,7 @@
-class CooksController < ApplicationController
+class UsersController < ApplicationController
   get '/login' do
     if !logged_in?
-      erb :'cooks/login'
+      erb :'/login'
     else
       redirect("/recipes")
     end
@@ -9,7 +9,7 @@ class CooksController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      erb :'/cooks/create_cook'
+      erb :'/users/create_user'
     else
       redirect("/recipes")
     end
@@ -24,21 +24,21 @@ class CooksController < ApplicationController
     end
   end
 
-  get '/cooks' do
-    @cooks = Cook.all
-    erb :'/cooks/index'
+  get '/users' do
+    @users = User.all
+    erb :'/users/index'
   end
 
-  get '/cooks/:slug' do
-    @cook = Cook.find_by_slug(params[:slug])
-    erb :'/cooks/show'
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    erb :'/users/show'
   end
 
   post '/signup' do
    if !params[:name].empty? && !params[:username].empty? && !params[:password].empty?
-     @cook = Cook.create(name: params[:name],username: params[:username], password: params[:password])
-     @cook.save
-     session[:user_id] = @cook.id
+     @user = User.create(name: params[:name],username: params[:username], password: params[:password])
+     @User.save
+     session[:user_id] = @user.id
      redirect("/recipes")
    else
      redirect("/signup")
@@ -46,9 +46,9 @@ class CooksController < ApplicationController
   end
 
    post '/login' do
-    @cook = Cook.find_by(username: params[:username])
-    if @cook != nil && @cook.authenticate(params[:password])
-      session[:user_id] = @cook.id
+    @user = User.find_by(username: params[:username])
+    if @user != nil && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
       redirect("/recipes")
     else
       redirect("/signup")
