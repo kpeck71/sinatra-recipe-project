@@ -3,11 +3,15 @@
 <html>
   <head>
     <title>Chef's Recipe Index</title>
+    <style>
+      nav {text-align: right}
+      .border {border: 1px dotted grey; padding:10px}
+    </style>
   </head>
   <body>
-    <nav> <!--make this align right -->
+    <nav class="border"> <!--make this align right -->
       <% if logged_in? %>
-        Hello, <%=current_user.name %>  |  <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a>
+        <p>Hello, <%=current_user.name %>  |  <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a></p>
       <% else %>
         <a href="/signup">Sign Up</a>
         <a href="/login"> Log In </a>
@@ -23,8 +27,7 @@
       <%= yield %>
     </div>
   </body>
-  <footer>
-    <br></br>
-    <p><a href ="/recipes">See All Recipes</a></p>
+  <footer class="border">
+  <div><a href ="/recipes">See All Recipes</a></div>
   </footer>
 </html>
