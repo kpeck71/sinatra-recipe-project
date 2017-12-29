@@ -2,13 +2,14 @@
 
 <html>
   <head>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700" rel="stylesheet">
     <title>Chef's Recipe Index</title>
     <style>
       p {font-family:'Open Sans', sans-serif;}
-      h1, h2, h3 {color:#800800; font-family:'Montserrat'}
+      .user {font-weight:bold; font-size:1.2em}
+      h1, h2, h3 {color:#800800; font-family:'Montserrat';font-weight:700}
       a {font-family:'Open Sans';}
-      label {font-family:'Open Sans', sans-serif; font-weight:bold}
+      label {font-family:'Open Sans', sans-serif; font-weight:700}
       nav {text-align: right}
       .border {border: 1px dotted grey; padding:10px}
       footer {margin-top:10px}
@@ -21,7 +22,9 @@
   <body>
     <nav class="border"> <!--make this align right -->
       <% if logged_in? %>
-        <strong><a href="/users/<%=current_user.slug%>"><%=current_user.name%></a></strong>  |  <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a>
+        <div class="user"><a href="/users/<%=current_user.slug%>"><%=current_user.name%></a></div>
+
+        <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a>
       <% else %>
         <a href="/signup">Sign Up</a>
         <a href="/login"> Log In </a>

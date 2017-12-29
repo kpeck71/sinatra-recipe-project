@@ -11,7 +11,7 @@
 <p><a href="/users/<%=@recipe.user.slug%>"><%=@recipe.user.name%></a></p>
 
 <%if current_user.id == @recipe.user_id%>
-<input type="button" class = "btn" value="Edit Your Recipe" onclick="window.location.href='/recipes/<%=@recipe.slug%>/edit'">
+<input type="button" class="btn" value="Edit Your Recipe" onclick="window.location.href='/recipes/<%=@recipe.slug%>/edit'">
 <br>
   <form action="/recipes/<%=@recipe.slug%>/delete" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
