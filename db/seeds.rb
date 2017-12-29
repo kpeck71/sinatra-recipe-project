@@ -7,10 +7,11 @@ pasta.user = mario
 pasta.categories << italian
 eggplant_parm = Recipe.create(name:"eggplant parmesan", ingredients: "eggplant, tomato sauce, parmesan")
 eggplant_parm.categories << italian
+eggplant_parm.user = luigi
 bob = User.create(name:"Bob",username:"bobsburgers",password:"lynne")
 burger = Recipe.create(name:"A Leek Of Their Own Burger", ingredients: "ground beef, leeks, onion, lettuce bun")
+burger.user = bob
 american = Category.create(name:"American")
 paleo = Category.create(name:"Paleo")
-burger.user = bob
 burger.categories << american
 burger.categories << paleo

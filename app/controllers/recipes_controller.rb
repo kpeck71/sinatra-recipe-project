@@ -20,7 +20,6 @@ class RecipesController < ApplicationController
     erb :'/recipes/show'
   end
 
-
   post '/recipes' do
     if logged_in?
       if current_user.recipes.find_by(name: params[:recipe][:name])
