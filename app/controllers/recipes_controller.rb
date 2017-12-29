@@ -39,7 +39,7 @@ class RecipesController < ApplicationController
         redirect("/recipes/new?error=This recipe exists already")
       end
 
-      if params[:recipe][:name] != nil && params[:recipe][:ingredients] != nil
+      if params[:recipe][:name] != "" && params[:recipe][:ingredients] != ""
       @recipe = Recipe.create(params["recipe"])
       @recipe.user_id = current_user.id
 
@@ -51,7 +51,7 @@ class RecipesController < ApplicationController
       redirect("/recipes/#{@recipe.slug}")
 
       else
-        redirect("/recipes/new")
+        redirect("/recipes/new?error=Both Name and Ingredients are required")
       end
 
     else
