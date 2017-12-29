@@ -1,4 +1,4 @@
 <h2>All Categories</h2>
 <%Category.all.each do |category|%>
-<p><%=category.name%></p>
+<p><a href="/categories/<%=category.slug%>"><%=category.name%></a></p>
 <%end%>
