@@ -3,8 +3,8 @@
 <p><%=@recipe.ingredients%></p>
 
 <label>Categories:</label>
-<p><%@recipe.categories.each do |category|%></p>
-<a href="/categories/<%=category.slug%>"><%=category.name%></a>
+<%@recipe.categories.each do |category|%>
+<p><a href="/categories/<%=category.slug%>"><%=category.name%></a></p>
 
 <label>Chef: </label>
 <p><a href="/users/<%=@recipe.user.slug%>"><%=@recipe.user.name%></a></p>
@@ -12,13 +12,11 @@
 <%end%>
 
 <%if current_user.id == @recipe.user_id%>
-<br></br>
-<input type="button" value="Edit Your Recipe" onclick="window.location.href='/recipes/<%=@recipe.slug%>/edit'">
-<br></br>
+<input type="button" class = "btn" value="Edit Your Recipe" onclick="window.location.href='/recipes/<%=@recipe.slug%>/edit'">
+<br>
   <form action="/recipes/<%=@recipe.slug%>/delete" method="post">
     <input id="hidden" type="hidden" name="_method" value="delete">
-    <input type="submit" value="Delete Recipe">
+    <input type="submit" class="btn-delete" value="Delete Your Recipe"></div>
   </form>
   <% else %>
-  <p>
 <%end%>
