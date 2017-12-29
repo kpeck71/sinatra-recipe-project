@@ -19,19 +19,28 @@ class RecipesController < ApplicationController
     erb :'/recipes/show'
   end
 
+
   post '/recipes' do
     if logged_in?
-      @recipe = Recipe.create(params["recipe"])
+      if current_user.recipes.find_by_slug(name: params[:name])
+        redirect("/recipes/new?error=This recipe exists already")
+      end
+
       if params[:name] != "" && params[:ingredients] != ""
-        @recipe = current_user.recipes.create(name: params[:name], ingredients: params[:ingredients], categories: params[:category][:name])
-        # if !params[:recipe][:new_category].empty?
-        #   @recipe.categories << Category.create(params[:category])
-        # end
-        @recipe.save
-        redirect("/recipes/#{@recipe.slug}")
+      @recipe = Recipe.create(params["recipe"])
+      @recipe.user_id = current_user.id
+
+        if !params[:category][:name].empty?
+          @recipe.categories << Category.create(params[:category])
+        end  
+      @recipe.save
+
+      redirect("/recipes/#{@recipe.slug}")
+
       else
         redirect("/recipes/new")
       end
+
     else
       redirect("/login")
     end
