@@ -1,7 +1,6 @@
 <h2><%=@category.name%></h2>
 
 <%@category.recipes.each do |recipe| %>
-<strong><%=recipe.name%></strong>
-<br>Made with <%=recipe.ingredients%>
-<br></br>
+<p><a href="/recipes/<%=recipe.slug%>"><%=recipe.name%></a></p>
+<p>Made with <%=recipe.ingredients%></p>
 <%end%>

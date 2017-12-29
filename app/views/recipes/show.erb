@@ -5,11 +5,10 @@
 <label>Categories:</label>
 <%@recipe.categories.each do |category|%>
 <p><a href="/categories/<%=category.slug%>"><%=category.name%></a></p>
+<%end%>
 
 <label>Chef: </label>
 <p><a href="/users/<%=@recipe.user.slug%>"><%=@recipe.user.name%></a></p>
-
-<%end%>
 
 <%if current_user.id == @recipe.user_id%>
 <input type="button" class = "btn" value="Edit Your Recipe" onclick="window.location.href='/recipes/<%=@recipe.slug%>/edit'">

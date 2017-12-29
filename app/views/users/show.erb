@@ -1,6 +1,5 @@
-<h3>Name: <%=@user.name%></h3>
-<p><strong>Recipes</strong></p>
+<h3>Recipes from <%=@user.name%></h3>
+
 <%@user.recipes.each do |recipe| %>
-  <a href="/recipes/<%=recipe.slug%>"><%=recipe.name%></a>
-  <br>
+  <p> -- <a href="/recipes/<%=recipe.slug%>"><%=recipe.name%></a></p>
 <%end%>
