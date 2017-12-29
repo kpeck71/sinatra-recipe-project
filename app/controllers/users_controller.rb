@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   get '/login' do
+    @error_message = params[:error]
     if !logged_in?
       erb :'/users/login'
     else

@@ -1,6 +1,7 @@
 class RecipesController < ApplicationController
 
   get '/recipes' do
+    @error_message = params[:error]
     @recipes = Recipe.all
     erb :'/recipes/index'
   end
@@ -11,13 +12,25 @@ class RecipesController < ApplicationController
   end
 
   get '/recipes/:slug/edit' do
-    @recipe = Recipe.find_by_slug(params[:slug])
-    erb :'/recipes/edit'
+    if logged_in?
+      @recipe = Recipe.find_by_slug(params[:slug])
+      if @recipe.user_id == current_user.id
+        erb :'/recipes/edit'
+      else
+        redirect("/recipes?error=You cannot edit a recipe that is not your own")
+      end
+    else
+      redirect("/login?error=Not logged in")
+    end
   end
 
   get '/recipes/:slug' do
-    @recipe = Recipe.find_by_slug(params[:slug])
-    erb :'/recipes/show'
+    if logged_in?
+      @recipe = Recipe.find_by_slug(params[:slug])
+      erb :'/recipes/show'
+    else
+      redirect("/login?error=Please log in to see recipe details")
+    end
   end
 
   post '/recipes' do
@@ -74,8 +87,7 @@ class RecipesController < ApplicationController
         @recipe.delete
         redirect("/recipes")
       else
-        #flash message?
-        redirect("/recipes")
+        redirect("/recipes?error=You cannot delete a recipe that is not your own")
       end
     else
       redirect("/login")
