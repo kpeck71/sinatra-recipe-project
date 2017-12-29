@@ -1,13 +1,14 @@
-<h2><%=@recipe.name%></h2>
-<strong>Chef: </strong>
-<a href="/users/<%=@recipe.user.slug%>"><%=@recipe.user.name%></a>
-<br></br>
-<strong>Ingredients: </strong>
-<%=@recipe.ingredients%>
-<br></br>
-<strong>Categories:</strong>
-<%@recipe.categories.each do |category|%>
-<br><a href="/categories/<%=category.slug%>"><%=category.name%></a>
+<h3><%=@recipe.name%></h3>
+<label>Ingredients: </label>
+<p><%=@recipe.ingredients%></p>
+
+<label>Categories:</label>
+<p><%@recipe.categories.each do |category|%></p>
+<a href="/categories/<%=category.slug%>"><%=category.name%></a>
+
+<label>Chef: </label>
+<p><a href="/users/<%=@recipe.user.slug%>"><%=@recipe.user.name%></a></p>
+
 <%end%>
 
 <%if current_user.id == @recipe.user_id%>
