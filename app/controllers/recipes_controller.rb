@@ -21,8 +21,12 @@ class RecipesController < ApplicationController
 
   post '/recipes' do
     if logged_in?
+      @recipe = Recipe.create(params["recipe"])
       if params[:name] != "" && params[:ingredients] != ""
-        @recipe = current_user.recipes.create(name: params[:name], ingredients: params[:ingredients])
+        @recipe = current_user.recipes.create(name: params[:name], ingredients: params[:ingredients], categories: params[:category][:name])
+        # if !params[:recipe][:new_category].empty?
+        #   @recipe.categories << Category.create(params[:category])
+        # end
         @recipe.save
         redirect("/recipes/#{@recipe.slug}")
       else

@@ -6,12 +6,13 @@
     <style>
       nav {text-align: right}
       .border {border: 1px dotted grey; padding:10px}
+      h2 {text-decoration: underline;}
     </style>
   </head>
   <body>
     <nav class="border"> <!--make this align right -->
       <% if logged_in? %>
-        <p>Hello, <%=current_user.name %>  |  <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a></p>
+        <p>Hello, <a href="/users/<%=current_user.slug%>"><%=current_user.name%></a>  |  <a href="/recipes/new"> Create Recipe </a>  |  <a href="/logout"> Log Out </a></p>
       <% else %>
         <a href="/signup">Sign Up</a>
         <a href="/login"> Log In </a>

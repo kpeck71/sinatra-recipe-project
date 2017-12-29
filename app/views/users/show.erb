@@ -2,4 +2,6 @@
 <p><strong>Recipes</strong></p>
 <%@user.recipes.each do |recipe| %>
   <a href="/recipes/<%=recipe.slug%>"><%=recipe.name%></a>
+  <br>
 <%end%>
+<br></br>

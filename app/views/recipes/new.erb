@@ -7,8 +7,9 @@
 <br></br>
 <label><strong>Category: </p><%Category.all.each do |category|%></strong></label>
 <label><%=category.name%></label>
-<input type="checkbox" name="recipe[category_ids][]" value="<%=category.id%>" id="<%= category.name %>"</input>
+<input type="checkbox" name="category[name]" value="<%=category.id%>" id="<%= category.name %>"</input>
 <%end%>
+<p>And/or Create New Category: <input type="text" name="category[name]" id="new_category"></input></p>
 
 <input type="submit" value="Submit">
 </form>
