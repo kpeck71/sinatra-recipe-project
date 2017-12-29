@@ -7,8 +7,12 @@ class RecipesController < ApplicationController
   end
 
   get '/recipes/new' do
-    @error_message = params[:error]
-    erb :'/recipes/new'
+    if logged_in?
+      @error_message = params[:error]
+      erb :'/recipes/new'
+    else
+      redirect("/login")
+    end
   end
 
   get '/recipes/:slug/edit' do
