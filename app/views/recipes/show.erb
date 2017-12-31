@@ -3,8 +3,12 @@
 <p><%=@recipe.ingredients%></p>
 
 <label>Categories:</label>
-<%@recipe.categories.each do |category|%>
-<p><a href="/categories/<%=category.slug%>"><%=category.name%></a></p>
+<%if @recipe.categories.empty? %>
+  <p>No categories selected</p>
+<%else%>
+  <%@recipe.categories.each do |category|%>
+  <p><a href="/categories/<%=category.slug%>"><%=category.name%></a></p>
+  <%end%>
 <%end%>
 
 <label>Chef: </label>
