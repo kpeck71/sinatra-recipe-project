@@ -18,6 +18,8 @@ rake db:seed
 
 Then, run shotgun
 
+Create an account at "/signup" and begin creating recipes.
+
 Contributing
 The app is available as open source under the terms of the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
 

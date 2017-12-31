@@ -9,7 +9,9 @@ User, Recipe, Category
 - [x] Include at least one has_many relationship (x has_many y e.g. User has_many Posts)
 A user has many recipes, a category has_and_belongs_to_many recipes, a recipe has_and_belongs_to_many categories
 - [x] Include user accounts
+Users can sign up, login, and create recipes. Users can only edit their own recipes.
 - [x] Ensure that users can't modify content created by other users
+This is covered by '/recipes/:slug/edit' route
 - [x] Ensure that the belongs_to resource has routes for Creating, Reading, Updating and Destroying
 Recipes routes for Creating (new.erb), Reading (show.erb), Updating (edit.erb), and Destroying (funtionality included in show.erb)
 - [x] Include user input validations
