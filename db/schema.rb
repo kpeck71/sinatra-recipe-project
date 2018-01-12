@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 20171228025447) do
     t.string "name"
   end
 
-  create_table "categories_recipes", force: :cascade do |t|
+  create_table "category_recipes", force: :cascade do |t|
     t.integer "category_id"
     t.integer "recipe_id"
-    t.index ["category_id"], name: "index_categories_recipes_on_category_id"
-    t.index ["recipe_id"], name: "index_categories_recipes_on_recipe_id"
+    t.index ["category_id"], name: "index_category_recipes_on_category_id"
+    t.index ["recipe_id"], name: "index_category_recipes_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
