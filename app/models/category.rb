@@ -1,6 +1,6 @@
 class Category < ActiveRecord::Base
-  has_many :recipes
-  has_many :categories_recipes
+  has_many :category_recipes
+  has_many :recipes, through: :category_recipes
 
   def slug #should i add these as helper methods in my app_controller? self?
     name.downcase.gsub(" ","-")
