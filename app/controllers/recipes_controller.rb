@@ -46,10 +46,7 @@ class RecipesController < ApplicationController
       if params[:recipe][:name] != "" && params[:recipe][:ingredients] != ""
       @recipe = Recipe.create(params["recipe"])
       @recipe.user_id = current_user.id
-
-        if !params[:category][:name].empty?
-          @recipe.categories << Category.create(params[:category])
-        end
+      @recipe.categories << Category.create(params[:category]) if !params[:category][:name].empty?
       @recipe.save
 
       redirect("/recipes/#{@recipe.slug}")
@@ -65,23 +62,15 @@ class RecipesController < ApplicationController
 
   patch '/recipes/:slug' do
     @recipe = Recipe.find_by_slug(params[:slug])
-    @recipe.update(params[:recipe])
+    if current_user.id == @recipe.user_id
+      params[:recipe][:category_ids] ||= false
+      @recipe.update(params[:recipe])
+      @recipe.categories << Category.create(params[:category]) if !params[:category][:name].empty?
 
-    if !params[:recipe][:name].empty?
-      @recipe.name = params[:recipe][:name]
+      redirect("/recipes/#{@recipe.slug}")
+    else
+      redirect("/recipes")
     end
-
-    if !params[:recipe][:ingredients].empty?
-      @recipe.ingredients = params[:recipe][:ingredients]
-    end
-
-    if !params[:category][:name].empty?
-      @recipe.categories << Category.create(name: params[:category][:name])
-    end
-
-    @recipe.save
-
-    redirect("/recipes/#{@recipe.slug}")
   end
 
   delete '/recipes/:slug/delete' do

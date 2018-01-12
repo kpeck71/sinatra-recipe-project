@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   end
 
   get '/signup' do
+    @error_message = params[:error]
     if !logged_in?
       erb :'/users/create_user'
     else
@@ -36,13 +37,17 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-   if !params[:name].empty? && !params[:username].empty? && !params[:password].empty?
-     @user = User.create(name: params[:name],username: params[:username], password: params[:password])
-     @user.save
-     session[:user_id] = @user.id
-     redirect("/recipes")
+  if !User.all.find_by(username: params[:username])
+    if !params[:name].empty? && !params[:username].empty? && !params[:password].empty?
+       @user = User.create(name: params[:name],username: params[:username], password: params[:password])
+       @user.save
+       session[:user_id] = @user.id
+       redirect("/recipes")
+     else
+       redirect("/signup")
+     end
    else
-     redirect("/signup")
+     redirect("/signup?error=This username already exists.")
    end
   end
 
